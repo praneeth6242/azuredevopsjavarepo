@@ -1,0 +1,23 @@
+parameters: 
+  - name: openjdkversion
+    displayName: java version
+    type: string
+    default: '1.17' 
+  - name: package
+    displayName: package
+    type: string
+    default: 'java-1.17.0-openjdk-amd64'   
+  - name: task
+    displayName: task in steps 
+    type: string 
+    default: 'Maven@3'
+    steps:  
+      - task: Maven@3
+        inputs:
+         mavenPomFile: 'pom.xml'
+         goals: 'package'
+         publishJUnitResults: true 
+         testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+         javaHomeOption: Path
+         jdkDirectory: $(Build.Repository.LocalPath)/"${{parameters.package}}"
+         jdkVersionOption: "${{parameters.openjdkversion}}" 
