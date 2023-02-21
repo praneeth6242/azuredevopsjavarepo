@@ -20,11 +20,15 @@ parameters:
   - name: task
     displayName: task in steps 
     type: string 
-    default: 'Maven@3'
+    default: 'Maven@3' 
+  - name: pomfile
+    displayName: pomfile
+    type: string 
+    default:  
 steps:  
   - task: ${{parameters.task}}
     inputs:
-      mavenPomFile: 'pom.xml'
+      mavenPomFile: "${{parameters.pomfile}}"
       goals: "${{parameters.goals}}"
       publishJUnitResults: true 
       testResultsFiles: '**/surefire-reports/TEST-*.xml' 
