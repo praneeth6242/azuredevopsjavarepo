@@ -20,13 +20,13 @@ parameters:
     displayName: task in steps 
     type: string 
     default: 'Maven@3'
-    steps:  
-      - task: ${{parameters.task}}
-        inputs:
-         mavenPomFile: 'pom.xml'
-         goals: "${{parameters.goals}}"
-         publishJUnitResults: true 
-         testResultsFiles: '**/surefire-reports/TEST-*.xml' 
-         javaHomeOption: Path
-         jdkDirectory: $(Build.Repository.LocalPath)/"${{parameters.package}}"
-         jdkVersionOption: "${{parameters.openjdkversion}}" 
+steps:  
+  - task: ${{parameters.task}}
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: "${{parameters.goals}}"
+      publishJUnitResults: true 
+      testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+      javaHomeOption: Path
+      jdkDirectory: $(Build.Repository.LocalPath)/"${{parameters.package}}"
+      jdkVersionOption: "${{parameters.openjdkversion}}" 
