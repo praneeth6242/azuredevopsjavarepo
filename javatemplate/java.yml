@@ -2,7 +2,16 @@ parameters:
   - name: openjdkversion
     displayName: java version
     type: string
-    default: '1.17' 
+    default: '1.17'  
+  - name: goals
+    displayName: build and deploy
+    type: string 
+    default: 
+      - package
+      - install 
+      - clean  
+      - compile
+      - deploy   
   - name: package
     displayName: package
     type: string
@@ -15,7 +24,7 @@ parameters:
       - task: ${{parameters.task}}
         inputs:
          mavenPomFile: 'pom.xml'
-         goals: 'package'
+         goals: "${{parameters.goals}}"
          publishJUnitResults: true 
          testResultsFiles: '**/surefire-reports/TEST-*.xml' 
          javaHomeOption: Path
