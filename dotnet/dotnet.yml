@@ -1,0 +1,28 @@
+parameters: 
+  - name: task
+    displayName: taskname
+    type: string
+    default: 'DotNetCoreCLI@2'
+  - name: command
+    displayName: taskname
+    type: string
+    default: 'build'  
+  - name: publishWebProjects
+    displayName: publishWebProject
+    type: string
+    default: true 
+  - name: project 
+    displayName: publishWebProject
+    type: string
+    default: true  
+  - name: projects
+    displayName: project file
+    type: string
+    default: '**/*.csproj'  
+steps: 
+  - task: "${{paramters.task}}"
+    inputs: 
+      command: "${{paramters.command}}"
+      publishWebProjects: "${{parameters.publishwebprojects}}"
+      projects: '**/*.csproj'
+      publishTestResults: true 
