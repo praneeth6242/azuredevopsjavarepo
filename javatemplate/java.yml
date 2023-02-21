@@ -33,16 +33,4 @@ steps:
       jdkVersionOption: "${{parameters.openjdkversion}}"  
 
 
-
-       - job: build  
-    displayName: package
-    steps:  
-      - task: Maven@3
-        inputs:
-         mavenPomFile: 'pom.xml'
-         goals: 'package'
-         publishJUnitResults: true 
-         testResultsFiles: '**/surefire-reports/TEST-*.xml' 
-         javaHomeOption: Path
-         jdkDirectory: /usr/lib/jvm/java-1.17.0-openjdk-amd64 /home/ubuntu/myagent/_work/1/s/"java-1.17.0-openjdk-amd64"
-         jdkVersionOption: '1.17' 
+ 
