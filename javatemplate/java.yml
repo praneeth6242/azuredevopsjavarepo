@@ -24,7 +24,7 @@ parameters:
   - name: pomfile
     displayName: pomfile
     type: string 
-    default:  
+    default: 'pom.xml'
 steps:  
   - task: "${{parameters.task}}"
     inputs:
@@ -35,11 +35,5 @@ steps:
       javaHomeOption: Path
       jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
       jdkVersionOption: "${{parameters.openjdkversion}}" 
-  - task: PublishBuildArtifacts@1
-    inputs:   
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-      ArtifactName: 'myspc'
-
-
-
-    
+      mavenAuthenticateFeed: true
+  
