@@ -29,6 +29,10 @@ parameters:
     displayName: authenticationfeed
     type: string 
     default: 'true'  
+  - name: PathtoPublish
+    displayName: Path
+    type: string 
+    default: "$(Build.ArtifactStagingDirectory)/taget/spring-petclinic-2.7.3.jar"    
 steps:  
   - task: "${{parameters.task}}"
     inputs:
@@ -40,4 +44,8 @@ steps:
       jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
       jdkVersionOption: "${{parameters.openjdkversion}}" 
       mavenAuthenticateFeed: "${{parameters.feed}}"
-  
+  - task: PublishBuildArtifacts@1
+    inputs: 
+      PathtoPublish: "${{parameters.PathtoPublish}}"
+      ArtifactName: 'myspc' 
+      publishLocation: 'Container'
