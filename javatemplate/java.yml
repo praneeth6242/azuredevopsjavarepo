@@ -6,7 +6,8 @@ parameters:
   - name: goals
     displayName: build and deploy
     type: string 
-    default: 
+    default: 'package'
+    values:
       - package
       - install 
       - clean  
