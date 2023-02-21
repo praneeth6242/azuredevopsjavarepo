@@ -16,7 +16,7 @@ parameters:
   - name: package
     displayName: package
     type: string
-    default: 'java-1.17.0-openjdk-amd64'   
+    default: 'java-1.17.0-openjdk-amd64'                                                     
   - name: task
     displayName: task in steps 
     type: string 
@@ -28,9 +28,7 @@ steps:
       goals: "${{parameters.goals}}"
       publishJUnitResults: true 
       testResultsFiles: '**/surefire-reports/TEST-*.xml' 
-      javaHomeOption: Path
-      jdkDirectory:  "$(Build.Repository.LocalPath) /${{parameters.package}}"
-      jdkVersionOption: "${{parameters.openjdkversion}}"  
+      jdkVersionOption: "${{parameters.openjdkversion}}" 
 
 
 
