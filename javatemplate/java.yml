@@ -25,6 +25,10 @@ parameters:
     displayName: pomfile
     type: string 
     default: 'pom.xml'
+  - name: feed
+    displayName: authenticationfeed
+    type: string 
+    default: 'true'  
 steps:  
   - task: "${{parameters.task}}"
     inputs:
@@ -35,5 +39,5 @@ steps:
       javaHomeOption: Path
       jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
       jdkVersionOption: "${{parameters.openjdkversion}}" 
-      mavenAuthenticateFeed: true
+      mavenAuthenticateFeed: "${{parameters.feed}}"
   
