@@ -29,8 +29,9 @@ steps:
       publishJUnitResults: true 
       testResultsFiles: '**/surefire-reports/TEST-*.xml' 
       javaHomeOption: Path
-      jdkDirectory: /home/ubuntu/myagent/_work/1/s/"${{parameters.package}}"
+      jdkDirectory: $(Build.Repository.LocalPath)/"${{parameters.package}}"
       jdkVersionOption: "${{parameters.openjdkversion}}"  
 
 
- 
+
+    
