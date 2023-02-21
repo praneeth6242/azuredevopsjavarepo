@@ -26,7 +26,7 @@ parameters:
     type: string 
     default:  
 steps:  
-  - task: ${{parameters.task}}
+  - task: "${{parameters.task}}"
     inputs:
       mavenPomFile: "${{parameters.pomfile}}"
       goals: "${{parameters.goals}}"
@@ -35,6 +35,10 @@ steps:
       javaHomeOption: Path
       jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
       jdkVersionOption: "${{parameters.openjdkversion}}" 
+  - task: PublishBuildArtifacts@1
+    inputs:   
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+      ArtifactName: 'myspc'
 
 
 
