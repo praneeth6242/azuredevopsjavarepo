@@ -33,6 +33,22 @@ parameters:
     displayName: Path
     type: string 
     default: "$(Build.ArtifactStagingDirectory)/taget/spring-petclinic-2.7.3.jar"    
+  - name: downloadPath
+    displayName: download path 
+    type: string 
+    default: '$(System.ArtifactsDirectory)'   
+  - name: buildType
+    displayName: buildType
+    type: string 
+    default: 'current'
+  - name: artifactName
+    displayName: artifactName
+    type: string 
+    default: 'myspc' 
+  - name: downloadType
+    displayName: downloadType
+    type: string 
+    default: 'single'             
 steps:  
   - task: "${{parameters.task}}"
     inputs:
@@ -48,4 +64,10 @@ steps:
     inputs: 
       PathtoPublish: "${{parameters.PathtoPublish}}"
       ArtifactName: 'myspc' 
-      publishLocation: 'Container'
+      publishLocation: 'Container' 
+  - task: DownloadBuildArtifacts@1
+    inputs:
+      buildType: "${{parameters.buildType}}"
+      downloadType: "${{parameters.downloadType}}"
+      artifactName: "${{parameters.artifactName}}"
+      downloadPath: "${{parameters.downloadPath}}"
