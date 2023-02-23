@@ -67,12 +67,4 @@ jobs:
           PathtoPublish: "${{parameters.PathtoPublish}}"
           ArtifactName: 'myspc' 
           publishLocation: 'Container'     
-  - job: "deploy"
-    dependsOn: "build"   
-    steps:        
-      - task: DownloadBuildArtifacts@1
-        inputs:
-          buildType: "${{parameters.buildType}}"
-          downloadType: "${{parameters.downloadType}}"
-          artifactName: "${{parameters.artifactName}}"
-          downloadPath: "${{parameters.downloadPath}}" 
+ 
