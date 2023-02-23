@@ -48,20 +48,20 @@ parameters:
   - name: downloadType
     displayName: downloadType
     type: string 
-    default: 'single'    
+    default: 'single'        
 jobs:  
   - job: "build"               
     steps:  
       - task: "${{parameters.task}}"
         inputs:
-        mavenPomFile: "${{parameters.pomfile}}"
-        goals: "${{parameters.goals}}"
-        publishJUnitResults: true 
-        testResultsFiles: '**/surefire-reports/TEST-*.xml' 
-        javaHomeOption: Path
-        jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
-        jdkVersionOption: "${{parameters.openjdkversion}}" 
-        mavenAuthenticateFeed: "${{parameters.feed}}" 
+          mavenPomFile: "${{parameters.pomfile}}"
+          goals: "${{parameters.goals}}"
+          publishJUnitResults: true 
+          testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+          javaHomeOption: Path
+          jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
+          jdkVersionOption: "${{parameters.openjdkversion}}" 
+          mavenAuthenticateFeed: "${{parameters.feed}}" 
   - job: "deploy"
     steps:        
       - task: PublishBuildArtifacts@1
