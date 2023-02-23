@@ -62,14 +62,14 @@ jobs:
           jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
           jdkVersionOption: "${{parameters.openjdkversion}}" 
           mavenAuthenticateFeed: "${{parameters.feed}}" 
-  - job: "deploy"
-    dependsOn: "build"   
-    steps:        
       - task: PublishBuildArtifacts@1
         inputs: 
           PathtoPublish: "${{parameters.PathtoPublish}}"
           ArtifactName: 'myspc' 
-          publishLocation: 'Container' 
+          publishLocation: 'Container'     
+  - job: "deploy"
+    dependsOn: "build"   
+    steps:        
       - task: DownloadBuildArtifacts@1
         inputs:
           buildType: "${{parameters.buildType}}"
