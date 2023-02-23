@@ -1,0 +1,77 @@
+parameters: 
+  - name: openjdkversion
+    displayName: java version
+    type: string
+    default: '1.17'  
+  - name: goals
+    displayName: build and deploy
+    type: string 
+    default: 'package'
+    values:
+      - package
+      - install 
+      - clean  
+      - compile
+      - deploy   
+  - name: package
+    displayName: package
+    type: string
+    default: 'java-1.17.0-openjdk-amd64'                                                     
+  - name: task
+    displayName: task in steps 
+    type: string 
+    default: 'Maven@3' 
+  - name: pomfile
+    displayName: pomfile
+    type: string 
+    default: 'pom.xml'
+  - name: feed
+    displayName: authenticationfeed
+    type: string 
+    default: 'true'  
+  - name: PathtoPublish
+    displayName: Path
+    type: string 
+    default: "$(Build.ArtifactStagingDirectory)/taget/spring-petclinic-2.7.3.jar"    
+  - name: downloadPath
+    displayName: download path 
+    type: string 
+    default: '$(System.ArtifactsDirectory)'   
+  - name: buildType
+    displayName: buildType
+    type: string 
+    default: 'current'
+  - name: artifactName
+    displayName: artifactName
+    type: string 
+    default: 'myspc' 
+  - name: downloadType
+    displayName: downloadType
+    type: string 
+    default: 'single'    
+jobs:  
+  - job: "build"               
+    steps:  
+      - task: "${{parameters.task}}"
+        inputs:
+        mavenPomFile: "${{parameters.pomfile}}"
+        goals: "${{parameters.goals}}"
+        publishJUnitResults: true 
+        testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+        javaHomeOption: Path
+        jdkDirectory: "/usr/lib/jvm/${{parameters.package}}"
+        jdkVersionOption: "${{parameters.openjdkversion}}" 
+        mavenAuthenticateFeed: "${{parameters.feed}}" 
+  - job: "deploy"
+    steps:        
+      - task: PublishBuildArtifacts@1
+        inputs: 
+          PathtoPublish: "${{parameters.PathtoPublish}}"
+          ArtifactName: 'myspc' 
+          publishLocation: 'Container' 
+      - task: DownloadBuildArtifacts@1
+        inputs:
+          buildType: "${{parameters.buildType}}"
+          downloadType: "${{parameters.downloadType}}"
+          artifactName: "${{parameters.artifactName}}"
+          downloadPath: "${{parameters.downloadPath}}" 
