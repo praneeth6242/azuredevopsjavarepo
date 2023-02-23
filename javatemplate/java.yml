@@ -63,6 +63,7 @@ jobs:
           jdkVersionOption: "${{parameters.openjdkversion}}" 
           mavenAuthenticateFeed: "${{parameters.feed}}" 
   - job: "deploy"
+    dependsOn: "build"   
     steps:        
       - task: PublishBuildArtifacts@1
         inputs: 
